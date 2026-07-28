@@ -10534,8 +10534,8 @@ window.__QUIZ_KP_DATA__ = [{"id": "live-ops-course", "title": "直播运营零�
 
       // 插入到首页搜索栏之前
       const searchBar = homePage.querySelector('.search-bar');
-      if (searchBar) {
-        homePage.insertBefore(panel, searchBar);
+      if (searchBar && searchBar.parentNode) {
+        searchBar.parentNode.insertBefore(panel, searchBar);
       } else {
         homePage.appendChild(panel);
       }
@@ -10602,6 +10602,12 @@ window.__QUIZ_KP_DATA__ = [{"id": "live-ops-course", "title": "直播运营零�
 })();
 
 </script>
+
+<!-- 用户认证与数据同步系统 -->
+<script src="auth.js"></script>
+
+<!-- 知识维度雷达图系统 -->
+<script src="dimension-radar.js"></script>
 
 </body>
 </html>

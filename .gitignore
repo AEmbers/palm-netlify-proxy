@@ -9,9 +9,15 @@ __pycache__/
 *.pyc
 .venv/
 
+# Node.js
+node_modules/
+npm-debug.log*
+
+# 数据库（不纳入版本控制，包含用户数据）
+server/data/
+
 # 部署相关
 gh-pages-deploy/
-node_modules/
 
 # 大文件（不纳入版本控制）
 *.rar

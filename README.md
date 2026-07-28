@@ -1,19 +1,40 @@
 # 🎓 Personal Learning Hub — 课程知识库与自适应测验系统
 
-一个集课程知识点管理、自适应测验、MIT 学术水平评级于一体的个人学习中心。
+一个集课程知识点管理、自适应测验、MIT 学术水平评级、多用户登录于一体的个人学习中心。
 
-**线上地址**：https://aembers.github.io/palm-netlify-proxy/
+**在线访问**：通过 Node.js 服务器运行，支持手机/平板/电脑跨设备访问
 
 ---
 
 ## 📋 项目概述
 
-本项目是一个纯前端单页应用（SPA），不依赖任何后端服务。核心功能：
+本项目包含前端单页应用（SPA）和 Node.js 后端服务器。核心功能：
 
-1. **知识库**：9 门课程、2400+ 知识点的结构化整理
-2. **自适应测验**：基于 SM-2 间隔重复算法，自动从知识点生成题目，智能追踪掌握度
-3. **MIT 水平评级**：基于真实 MIT 课程编号体系，计算含金量，映射到 13 级学术等级轴
-4. **可视化**：课程规模条形图、章节知识点分布图、分数折线图、掌握度进度条
+1. **多用户登录系统**：注册/登录/记住密码/自动登录，数据按用户隔离存储
+2. **知识库**：11 门课程、1580+ 知识点的结构化整理
+3. **自适应测验**：基于 SM-2 间隔重复算法，自动从知识点生成题目，智能追踪掌握度
+4. **MIT 水平评级**：基于真实 MIT 课程编号体系，计算含金量，映射到 13 级学术等级轴
+5. **7维知识雷达图**：可视化能力分布，智能推荐长板/短板课程
+6. **数据同步**：学习进度和测验成绩自动同步到后端，跨设备无缝衔接
+
+---
+
+## 🚀 快速开始
+
+```bash
+# 1. 克隆项目
+git clone <仓库地址>
+cd learning-hub-project
+
+# 2. 安装依赖并启动
+./start.sh
+
+# 3. 浏览器访问
+# 本机: http://localhost:3000
+# 局域网: http://<你的IP>:3000
+```
+
+首次访问会显示注册/登录界面，注册后即可使用所有功能。
 
 ---
 
@@ -21,32 +42,29 @@
 
 ```
 learning-hub-project/
-├── src/                          # 源代码
-│   ├── index.html                # ★ 主文件（学习中心完整版，所有功能内嵌）
-│   ├── quiz-system.js            # 测验系统源码（2439行）
-│   ├── mit-level-system.js       # MIT水平评级系统源码（824行）
-│   ├── live-ops-course/          # 独立课程页面（直播运营）
-│   ├── mit-14-01-microeconomics/ # 独立课程页面（微观经济学）
-│   ├── mit-python-6/             # 独立课程页面（Python）
-│   ├── data-analysis-14.310x/    # 独立课程页面（数据分析）
-│   ├── micro-theory-14.003x/     # 独立课程页面（微观理论）
-│   ├── econometric-14.320/       # 独立课程页面（计量经济学）
-│   ├── game-theory-14.161/       # 独立课程页面（博弈论）
-│   ├── optimization-6.C571/     # 独立课程页面（优化）
-│   ├── machine-learning-6.3900/ # 独立课程页面（机器学习）
-│   └── learning-center/          # 多文件版学习中心首页（非完整版）
-├── scripts/                      # 构建/工具脚本
-│   ├── extract_kp_for_quiz.py    # 从HTML提取知识点数据
-│   ├── inject_quiz.py            # 将测验系统注入HTML
-│   └── fix_python_kp.py          # 修复Python课程知识点提取
+├── start.sh                       # 一键启动脚本
+├── src/                           # 前端源代码
+│   ├── index.html                 # ★ 主文件（学习中心完整版）
+│   ├── auth.js                    # 用户认证与数据同步模块
+│   ├── quiz-system.js             # 测验系统源码
+│   ├── mit-level-system.js        # MIT水平评级系统源码
+│   ├── dimension-radar.js         # 7维知识雷达图模块
+│   ├── quiz_kp_data.json          # 知识点结构化数据
+│   └── */                         # 独立课程页面
+├── server/                        # 后端服务器
+│   ├── index.js                   # Express 服务器入口
+│   ├── db.js                      # SQLite 数据库操作
+│   ├── auth.js                    # JWT 认证中间件
+│   ├── package.json               # 依赖配置
+│   └── data/                      # 数据库文件（自动生成）
+├── scripts/                      # 工具脚本
 ├── data/                         # 数据文件
-│   └── quiz_kp_data.json         # 知识点结构化数据（9门课2400个知识点）
 ├── docs/                         # 开发文档
 │   ├── ARCHITECTURE.md           # 架构设计文档
+│   ├── DEPLOYMENT.md             # 部署指南 ★新增
 │   ├── QUIZ_SYSTEM.md            # 测验系统详细文档
 │   ├── MIT_LEVEL_SYSTEM.md       # MIT评级系统详细文档
 │   └── CONTRIBUTING.md           # 贡献指南
-├── assets/                       # 静态资源（预留）
 └── README.md                     # 本文件
 ```
 
